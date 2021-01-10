@@ -1,13 +1,27 @@
 import React from 'react'
 import { View, Text, StyleSheet, SafeAreaView,Image,TextInput,TouchableOpacity,ScrollView } from 'react-native'
 import { color } from 'react-native-reanimated'
+
 import Add from './Add';
 import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Formik } from 'formik'
+import * as yup from 'yup'
 
+export default class signin extends React.Component{
+  constructor(){
+    super();
+      this.state ={
+        hidepassword:true
+      }
+    }
+  
 
+  _handleSubmit = () =>{
+    alert('post edildi');
+  };  
 
-
-export default function signin({navigation}) {
+  render() {
   return (
      <ScrollView>
     <SafeAreaView style={style.body}>
@@ -18,26 +32,53 @@ export default function signin({navigation}) {
          <Image source={require('../../assets/Illustration.png')} />
       </View>
       <View style={style.board}>
-          <View style={style.Item}>
-             <TextInput 
-              placeholder={"Kullanıcı Adı"}
-             style={style.Input}/>
-          </View>
-          <View style={style.Item}>
-             <TextInput 
-              placeholder={"Şifre"}
-             style={style.Input}/>
-          </View>
-          <View style={{flexDirection:'row',justifyContent:'flex-end',marginTop:10}}>
-            <TouchableOpacity>
-             <Text style={{color:'#838391', fontSize:15}}>Şifreni mi unuttun</Text>
-             </TouchableOpacity>
-          </View>
-          <View style={style.Item}>
-            <TouchableOpacity style={style.button}>
-               <Text  style={{color:'#fff',fontSize:15,fontWeight:'700'}}>Login</Text>
-            </TouchableOpacity>
-          </View>
+        <Formik  
+          initialValues={{
+            username:'',
+            password:'',}}
+          onSubmit={this._handleSubmit}
+          validationSchema={yup.object().shape({
+               username:yup.string().required("Kullanıcı adı gereklidir"),
+               password:yup.string().required("Şifre gereklidir")
+          })} >
+            {({ values,handleSubmit,handleChange,errors }) => (
+                <View>      
+                  <View style={style.Item}>
+                    <TextInput
+                        value={values.username}
+                        onChangeText={handleChange('username')} 
+                        placeholder={"Kullanıcı Adı"}
+                        style={style.Input}/>
+                        {(errors.username) && <Text style={{color:'red'}}>{errors.username }</Text>}
+                  </View>
+                  <View style={style.Item}>
+                    <TextInput
+                        secureTextEntry={this.state.hidepassword}
+                        value={values.password}
+                        onChangeText={handleChange('password')} 
+                        placeholder={"Şifre"}
+                        style={style.Input}/>
+                        {(errors.password) && <Text style={{color:'red'}}>{errors.password}</Text>}
+                    <TouchableOpacity onPress={()=> this.setState({hidepassword:!this.state.hidepassword})} style={{ position:'absolute', right:10, top:12}}>
+                      <Icon name={(this.state.hidepassword) ? "eye-slash" :'eye'} size={25}/>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={{flexDirection:'row',justifyContent:'flex-end',marginTop:10}}>
+                    <TouchableOpacity>
+                    <Text style={{color:'#838391', fontSize:15}}>Şifreni mi unuttun</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={style.Item}>
+                    <TouchableOpacity
+                    onPress={handleSubmit} 
+                    style={style.button}>
+                      <Text  style={{color:'#fff',fontSize:15,fontWeight:'700'}}>Login</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                  ) 
+                }
+        </Formik>
           <View style={[style.Item,{justifyContent:'center',alignItems:'center'}]}>
             <Text style={{color:'#838391',fontSize:17}}>
                or
@@ -45,13 +86,13 @@ export default function signin({navigation}) {
           </View>
           <View style={style.social}>
             <TouchableOpacity style={style.social_item}>
-              <Text>facebook</Text>
+              <Icon name={"facebook"} color={'#3b5999'} size={20}/>
             </TouchableOpacity>
             <TouchableOpacity style={style.social_item}>
-              <Text>Linkedn</Text>
+             <Icon name={'linkedin'} color={"#0077B5"} size={20}/>
             </TouchableOpacity>
             <TouchableOpacity style={style.social_item}>
-              <Text>Twitter</Text>
+              <Icon name={'twitter-square'} color={"#55acee"} size={20}/>
             </TouchableOpacity>
           </View>
           <View style={style.account}>
@@ -66,6 +107,7 @@ export default function signin({navigation}) {
 
     </ScrollView>
   )
+  }
 }
 
 const style = StyleSheet.create({

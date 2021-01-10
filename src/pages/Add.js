@@ -2,7 +2,12 @@ import React from 'react'
 import { View, Text, StyleSheet,ScrollView,SafeAreaView,Image,Button, TouchableOpacity } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import signin from './signin'; 
-export default function Add({navigation}) {
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+
+
+export default function Add() {
+    
     return (
         <SafeAreaView style={style.body}>
             <View style={style.header}>
