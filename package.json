@@ -10,10 +10,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.13.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
     "formik": "^2.2.6",
+    "mobx": "^6.0.4",
+    "mobx-react": "^7.0.5",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-gesture-handler": "^1.9.0",
@@ -26,12 +29,14 @@
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
+    "@babel/plugin-proposal-decorators": "^7.12.12",
+    "@babel/preset-flow": "^7.12.1",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "1.1.0",
     "babel-jest": "25.5.1",
     "eslint": "6.8.0",
     "jest": "25.5.4",
-    "metro-react-native-babel-preset": "0.59.0",
+    "metro-react-native-babel-preset": "^0.59.0",
     "react-test-renderer": "16.13.1"
   },
   "jest": {

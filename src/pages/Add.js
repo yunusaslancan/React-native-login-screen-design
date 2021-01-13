@@ -2,12 +2,19 @@ import React from 'react'
 import { View, Text, StyleSheet,ScrollView,SafeAreaView,Image,Button, TouchableOpacity } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import signin from './signin'; 
+
+import MainStore from './MainStore';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-export default function Add() {
-    
+export default class Add extends React.Component{
+
+    componentDidMount(){
+        console.log(MainStore.getName());
+    }
+    render() {
+        const { navigation } = this.props;
     return (
         <SafeAreaView style={style.body}>
             <View style={style.header}>
@@ -42,15 +49,15 @@ export default function Add() {
                 </View>
                 <View style={style.social}>
                     <TouchableOpacity style={style.social_item}>
-                    <Text>facebook</Text>
+                    <Icon name={"facebook"} color={'#3b5999'} size={20}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={style.social_item}>
-                    <Text>Linkedn</Text>
+                    <Icon name={'linkedin'} color={"#0077B5"} size={20}/>
                     </TouchableOpacity>
                     <TouchableOpacity style={style.social_item}>
-                    <Text>Twitter</Text>
+                    <Icon name={'twitter-square'} color={"#55acee"} size={20}/>
                     </TouchableOpacity>
-                </View>
+               </View>
                 <View style={style.account}>
                     <Text style={style.signup}>Already have an account? </Text>
                     <TouchableOpacity onPress={() => navigation.navigate('signin')}>
@@ -61,6 +68,7 @@ export default function Add() {
 
         </SafeAreaView>
     )
+    }
 }
 
 const style =StyleSheet.create({

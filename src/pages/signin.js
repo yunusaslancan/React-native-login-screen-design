@@ -7,6 +7,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default class signin extends React.Component{
   constructor(){
@@ -15,13 +17,14 @@ export default class signin extends React.Component{
         hidepassword:true
       }
     }
-  
+
 
   _handleSubmit = () =>{
     alert('post edildi');
   };  
 
   render() {
+    const { navigation } = this.props;
   return (
      <ScrollView>
     <SafeAreaView style={style.body}>
